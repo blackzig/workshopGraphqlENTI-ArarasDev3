@@ -1,0 +1,17 @@
+type Operator{
+    id: ID!
+    name: String!
+    email: String!
+    login: String!
+    password: String!
+    active: Boolean!
+    logged: Boolean!
+    logged_in: String
+    logged_out: String
+    pass: String!
+}
+
+type Type_User{
+    id: ID!
+    function_operator: String!
+}
