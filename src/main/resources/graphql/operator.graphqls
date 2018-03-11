@@ -6,12 +6,20 @@ type Operator{
     password: String!
     active: Boolean!
     logged: Boolean!
-    logged_in: String
-    logged_out: String
+    loggedIn: String
+    loggedOut: String
     pass: String!
 }
 
-type Type_User{
+type TypeUser{
     id: ID!
-    function_operator: String!
+    functionOperator: String!
+}
+
+type Query{
+    login(login: String!, password: String!) : Operator
+}
+
+type Mutation{
+    setDataOperator(idOperator: ID!, pass: String!) : Operator
 }
