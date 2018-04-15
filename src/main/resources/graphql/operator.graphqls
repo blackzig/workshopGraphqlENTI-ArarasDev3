@@ -18,8 +18,9 @@ type TypeUser{
 
 type Query{
     login(login: String!, password: String!) : Operator
+    logout(id: ID!, pass: String!): Operator
 }
 
 type Mutation{
-    setDataOperator(idOperator: ID!, pass: String!) : Operator
+    setDataOperator(idOperator: ID!, pass: String!, action: Int!) : Operator
 }

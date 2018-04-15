@@ -39,7 +39,7 @@ public class Query implements GraphQLQueryResolver {
             GenerateKey gk = new GenerateKey();
             String pass = gk.generatePass();
 
-            operator = m.setDataOperator(operator.getId(), pass);
+            operator = m.setDataOperator(operator.getId(), pass, 1);
 
             return operator;
         }
@@ -47,4 +47,16 @@ public class Query implements GraphQLQueryResolver {
         return null;
     }
 
+    public Operator logout(String id, String pass) {
+        Operator operator;
+        operator = operatorRepository.findOne(id);
+
+        if (operator.getLogged() == true && operator.getActive() == true
+                && id.equals(operator.getId())
+                && pass.equalsIgnoreCase(operator.getPass())) {
+            Mutation m = new Mutation(operatorRepository, typeUserRepository);
+            operator = m.setDataOperator(operator.getId(), pass, 0);
+        }
+        return operator;
+    }
 }

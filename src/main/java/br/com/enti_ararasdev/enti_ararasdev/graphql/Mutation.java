@@ -27,15 +27,21 @@ public class Mutation implements GraphQLMutationResolver {
         this.typeUserRepository = typeUserRepository;
     }
 
-    public Operator setDataOperator(String idOperator, String pass) {
+    public Operator setDataOperator(String idOperator, String pass, Integer action) {
         Date date;
         DateTime dt = new DateTime();
         date = dt.saveDateInBD();
 
         Operator op = operatorRepository.findOne(idOperator);
         op.setPass(pass);
-        op.setLogged(Boolean.TRUE);
-        op.setLoggedIn(date);
+
+        if (action == 1) {
+            op.setLoggedIn(date);
+            op.setLogged(Boolean.TRUE);
+        } else {
+            op.setLoggedOut(date);
+            op.setLogged(Boolean.FALSE);
+        }
 
         return operatorRepository.save(op);
     }
